@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pravda Services | Прайс-лист Pravda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #0a0a12;
+            color: #00ffea;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0a12"/><path d="M0 0L100 100M100 0L0 100" stroke="%23003333" stroke-width="0.5"/></svg>');
+        }
+        
+        .cyber-border {
+            border: 1px solid #00ffea;
+            box-shadow: 0 0 10px #00ffea, inset 0 0 10px #00ffea;
+            position: relative;
+        }
+        
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 1px solid #ff00ff;
+            box-shadow: 0 0 15px #ff00ff, inset 0 0 15px #ff00ff;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #00ffea;
+        }
+        
+        .logo span {
+            color: #ff00ff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 30px;
+        }
+        
+        nav a {
+            color: #00ffea;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            padding: 5px 10px;
+        }
+        
+        nav a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px #00ffea;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .telegram-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #0088cc, #00acee);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px #0088cc;
+        }
+        
+        .telegram-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px #00acee;
+        }
+        
+        .pricing-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+
+
+margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #00ffea;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            padding: 25px;
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-name {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+        
+        .service-price {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #00ffea;
+        }
+        
+        .service-description {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #00ffea;
+            border: 1px solid #00ffea;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .buy-btn:hover {
+            background: #00ffea;
+            color: #0a0a12;
+            box-shadow: 0 0 15px #00ffea;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid #00ffea;
+            font-size: 0.9rem;
+        }
+        
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffea;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+
+
+5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 97px, 0); }
+            100% { clip: rect(38px, 9999px, 49px, 0); }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo glitch" >PRAVDA<span>SERVICES</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#pricing">Прайс</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero cyber-border" id="home">
+            <h1>PRICE - LIST</h1>
+            <p>Профессиональные услуги в области кибербезопасности и цифровых решений. Свяжитесь со мной для получения качественных услуг по доступным ценам.</p>
+            <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank">Связаться в Telegram</a>
+        </section>
+        
+        <section class="pricing-section" id="pricing">
+            <h2 class="section-title">ПРАЙС-ЛИСТ PRAVDA</h2>
+            
+
+
+            <div class="services-grid">
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Сайт под заказ</h3>
+                    <div class="service-price">5-25$</div>
+                    <p class="service-description">Профессиональная услуга сайт под заказ с вашим дизайном с гарантией качества выполнения.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+
+
+
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Аккаунты 5 лет</h3>
+                    <div class="service-price">2.5$</div>
+                    <p class="service-description">Аккаунты с 5-летним отлётом по доступной цене.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Аккаунты 6 лет</h3>
+                    <div class="service-price">3.5$</div>
+                    <p class="service-description">Аккаунты с 6-летним отлётом с повышенной надежностью.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+
+
+</div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Аккаунты 7 лет</h3>
+                    <div class="service-price">4.5$</div>
+                    <p class="service-description">Аккаунты с 7-летним отлётом для опытных пользователей.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Аккаунты 8 лет</h3>
+                    <div class="service-price">5$</div>
+                    <p class="service-description">Премиальные аккаунты с 8-летним отлётом.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Эвакуация Школы</h3>
+                    <div class="service-price">8$</div>
+                    <p class="service-description">Быстрая и безопасная эвакуация школы.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Деф навсегда</h3>
+                    <div class="service-price">5$</div>
+                    <p class="service-description">Постоянная защита от угроз и атак.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Мануал SWAT</h3>
+                    <div class="service-price">2.5$</div>
+                    <p class="service-description">Подробное руководство по использованию SWAT.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">SWAT</h3>
+                    <div class="service-price">10-15$</div>
+                    <p class="service-description">Профессиональная услуга SWAT с гарантией качества выполнения.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Doks</h3>
+                    <div class="service-price">5$</div>
+                    <p class="service-description">Профессиональная услуга Doks с полным сопровождением.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Мануал анонимность</h3>
+                    <div class="service-price">1$</div>
+                    <p class="service-description">Руководство по обеспечению полной анонимности в сети.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+                
+                <div class="service-card cyber-border">
+                    <h3 class="service-name">Снос ТГ и ТГК</h3>
+                    <div class="service-price">15-20$</div>
+                    <p class="service-description">Полный снос Telegram и Telegram каналов.</p>
+                    <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 15px 115px; font-size: 0.9rem;">Заказать</a></p>
+        </footer>
+                </div>
+            </div>
+        </section>
+        
+        <footer id="contact">
+            <p>© 2023 CYBER SERVICES. Все права защищены.</p>
+            <p>Свяжитесь со мной: <a href="https://t.me/Pravda_ebet" class="telegram-link" target="_blank" style="padding: 5px 15px; font-size: 0.9rem;">Pravda</a></p>
+        </footer> 
+    </div>
+
+    <script>
+        // Добавляем функциональность кнопкам заказа
+
+
+document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const serviceName = this.parentElement.querySelector('.service-name').textContent;
+                const servicePrice = this.parentElement.querySelector('.service-price').textContent;
+                
+                // В реальном приложении здесь будет переход к оплате
+                // В демо-версии просто показываем сообщение
+                alert("Вы выбрали услугу: ${serviceName}\nЦена: ${servicePrice}\nДля заказа свяжитесь со мной в Telegram.");
+                
+                // Перенаправление на Telegram (замените на свою ссылку)
+                // window.open('https://t.me/Pravda_ebet', '_blank');
+            });
+        });
+        
+        // Эффект мерцания для киберпанк атмосферы
+        const glitchElements = document.querySelectorAll('.glitch');
+        
+        setInterval(() => {
+            glitchElements.forEach(el => {
+                el.style.opacity = Math.random() > 0.1 ? 1 : 0.7;
+            });
+        }, 100);
+    </script>
+</body>
+</html
